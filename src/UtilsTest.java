@@ -32,7 +32,7 @@ class UtilsTest {
     }
 
     @Test
-    void get_cache() throws NoSuchMethodException {
+    void get_cache() throws NoSuchMethodException, InterruptedException {
         double output;  // first test without cache
         double output2;
         System.out.println("invoke double value");
@@ -47,11 +47,10 @@ class UtilsTest {
         ba.reset();
         Assertions.assertEquals(expected, test);
         Assertions.assertEquals(output, output2);
-        check_work(wrapCache); // test for Wrapper
         check_work(proxyCache); // test for Proxy
     }
 
-        void check_work(Fractionable obj) throws NoSuchMethodException {
+        void check_work(Fractionable obj) throws NoSuchMethodException, InterruptedException {
         double output;
         double output2;
         System.out.println("invoke double value");
@@ -77,5 +76,12 @@ class UtilsTest {
         ba.reset();
         Assertions.assertEquals("", test);
         Assertions.assertEquals(output, output2);
+        Thread.sleep(2000); // ожидание для сброса кэша
+        output2 = obj.doubleValue();
+        test = ba.toString();
+        ba.reset();
+        Assertions.assertEquals(expected, test); // проверка что кэш не используется
+        Assertions.assertEquals(output, output2);
+
     }
 }
