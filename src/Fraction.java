@@ -17,8 +17,15 @@ public class Fraction implements Fractionable{
             this.denum = denum;
         }
 
-        @Override
-        @Cache
+    @Override  // расширен класс примером еще одним методом для кэширования
+        @Cache(2500)
+        public double tribleValue() {
+        System.out.println("invoke trible value");
+        return (double) num*denum;
+        }
+
+    @Override
+        @Cache(1500)
         public double doubleValue() {
             System.out.println("invoke double value");
             return (double) num/denum;

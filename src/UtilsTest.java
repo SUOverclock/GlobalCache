@@ -26,8 +26,8 @@ class UtilsTest {
         pr= new PrintStream(ba);
         System.setOut(pr);
         noCache = new Fraction(3,4);
-        wrapCache = new Utils(noCache);
-        proxyCache = Utils.get_cache(noCache);
+        //wrapCache = new Utils(noCache);
+        proxyCache = Main.get_cache(noCache);
 
     }
 
